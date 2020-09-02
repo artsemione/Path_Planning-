@@ -1,0 +1,55 @@
+# Cria uma interface gráfica com o PySimpleGUI para a entrada das coordenadas x1...x4 ; y1...y4
+
+
+
+import PySimpleGUI as sg
+import numpy as np
+
+class TelaInicial:
+    def __init__(self):
+        #Layout
+        self.x = np.zeros((4), dtype=int)
+        self.y = np.zeros((4), dtype=int)
+
+
+        layout = [
+
+            [sg.Text('x1'), sg.Input(size=(4, 0)),
+             sg.Text('x2'), sg.Input(size=(4, 0)),
+             sg.Text('x3'), sg.Input(size=(4, 0)),
+             sg.Text('x4'), sg.Input(size=(4, 0))],
+
+            [sg.Text('y1'), sg.Input(size=(4, 0)),
+             sg.Text('y2'), sg.Input(size=(4, 0)),
+             sg.Text('y3'), sg.Input(size=(4, 0)),
+             sg.Text('y4'), sg.Input(size=(4, 0))],
+            [sg.Button('OK')]
+        ]
+
+        #Janela
+        janela = sg.Window("Dados do Usuário").layout(layout)
+
+        #Inputs
+        self.button, self.coordenadas = janela.read()
+
+    def Get_X(self):
+        self.x[0] = int(self.coordenadas[0])
+        self.x[1] = int(self.coordenadas[1])
+        self.x[2] = int(self.coordenadas[2])
+        self.x[3] = int(self.coordenadas[3])
+        return self.x
+
+    def Get_Y(self):
+        self.y[0] = int(self.coordenadas[4])
+        self.y[1] = int(self.coordenadas[5])
+        self.y[2] = int(self.coordenadas[6])
+        self.y[3] = int(self.coordenadas[7])
+        return self.y
+
+# Instância a Tela
+tela = TelaInicial()
+
+x = tela.Get_X()
+y = tela.Get_Y()
+
+print(x,y)
